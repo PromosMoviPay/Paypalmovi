@@ -1,0 +1,983 @@
+[Uplo<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movistar & PayPal | Tu Conexión y Pagos Simplificados</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        :root {
+            --movistar-blue: #007bff; /* Azul corporativo Movistar */
+            --movistar-dark-blue: #0056b3; /* Azul más oscuro para hover */
+            --movistar-light-blue: #e6f2ff; /* Azul muy claro para fondos suaves */
+            --movistar-green: #28a745; /* Verde para acentos positivos/ofertas */
+            --paypal-blue: #0070ba; /* Azul de PayPal */
+            --paypal-yellow: #ffc107; /* Amarillo de PayPal */
+            --text-dark: #333;
+            --text-medium: #555;
+            --text-light: #f8f9fa;
+            --bg-light: #ffffff;
+            --bg-dark: #212529; /* Un tono más oscuro para el footer */
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--movistar-light-blue);
+            color: var(--text-dark);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 25px; /* Más padding en los lados */
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-light);
+            padding: 18px 25px; /* Ajustado para mejor control del padding en el header */
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between; /* Alinea logo y nav/hamburguesa */
+            align-items: center;
+            border-bottom: 4px solid var(--movistar-blue); /* Borde más prominente */
+        }
+        .logo img {
+            height: 50px; /* Tamaño un poco más grande para el logo combinado */
+            max-width: 200px;
+            width: auto;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        nav ul li {
+            margin-right: 35px; /* Más espacio entre elementos */
+        }
+        nav ul li:last-child {
+            margin-right: 0; /* Ajuste para el último elemento, el padding del header lo maneja */
+        }
+        nav ul li a {
+            color: var(--movistar-blue);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.05em;
+            padding: 10px 0;
+            position: relative;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--movistar-green);
+            left: 50%;
+            bottom: -8px; /* Borde inferior más abajo */
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: var(--movistar-dark-blue);
+            transform: translateY(-2px);
+        }
+        .nav-button {
+            background-color: var(--movistar-green);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 8px rgba(40,167,69,0.3);
+        }
+        .nav-button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(40,167,69,0.4);
+        }
+
+        /* Botón de Menú Hamburguesa (para móviles) */
+        .hamburger-menu {
+            display: none; /* Oculto por defecto en desktop */
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--movistar-blue);
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s ease;
+            z-index: 1001; /* Asegura que esté por encima del menú desplegado */
+        }
+        .hamburger-menu:hover {
+            color: var(--movistar-dark-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--movistar-blue) 0%, var(--movistar-dark-blue) 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 120px 25px; /* Más padding */
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            margin-top: 25px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://via.placeholder.com/1400x600/007bff/0056b3?text=Movistar+Network') no-repeat center center/cover; /* Imagen de fondo sutil */
+            opacity: 0.1; /* Transparencia */
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.2em; /* Título más grande */
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            line-height: 1.1;
+        }
+        .hero p {
+            font-size: 1.5em; /* Texto más grande */
+            max-width: 950px;
+            margin: 0 auto 50px;
+            opacity: 0.9;
+        }
+        .hero-cta {
+            display: inline-block;
+            background-color: var(--movistar-green);
+            color: white;
+            padding: 20px 50px; /* Botón más grande */
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.3em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(40,167,69,0.4);
+        }
+        .hero-cta:hover {
+            background-color: #218838;
+            transform: translateY(-7px); /* Efecto al pasar el mouse */
+            box-shadow: 0 12px 25px rgba(40,167,69,0.5);
+        }
+
+        /* Section Styling */
+        section {
+            background-color: var(--bg-light);
+            padding: 70px 40px; /* Más padding */
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-top: 40px; /* Separación de la sección anterior */
+            text-align: center;
+        }
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--movistar-blue);
+            font-size: 3.2em; /* Títulos de sección más grandes */
+            font-weight: 700;
+            margin-bottom: 35px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 120px; /* Subrayado más largo */
+            height: 5px; /* Subrayado más grueso */
+            background: var(--movistar-green);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            border-radius: 3px;
+        }
+        section p {
+            font-size: 1.15em; /* Texto de párrafo más grande */
+            color: var(--text-medium);
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+
+        /* Cards Grid (Planes/Recargas) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Tarjetas ligeramente más grandes */
+            gap: 35px; /* Más espacio entre tarjetas */
+            margin-top: 45px;
+        }
+        .card {
+            background: var(--bg-light);
+            border: 1px solid var(--movistar-light-blue);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Sombra más definida */
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transición más suave */
+            text-align: center; /* Centrado para mejor estética */
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            transform: translateY(-15px); /* Efecto de elevación más pronunciado */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+        .card-icon {
+            font-size: 3.5em; /* Iconos más grandes */
+            color: var(--movistar-green);
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        .card:hover .card-icon {
+            color: var(--movistar-blue); /* Cambio de color del icono en hover */
+        }
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--movistar-blue);
+            font-size: 2.1em; /* Títulos de tarjeta más grandes */
+            margin-bottom: 18px;
+            line-height: 1.3;
+        }
+        .card-description {
+            font-size: 1.05em;
+            color: var(--text-medium);
+            margin-bottom: 25px;
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: left; /* Lista alineada a la izquierda */
+        }
+        .card ul li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+        .card ul li i {
+            font-size: 1em;
+            color: var(--movistar-green);
+            margin-right: 10px;
+            flex-shrink: 0; /* Evita que el ícono se encoja */
+        }
+        .card .price-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8em; /* Precio más grande */
+            color: var(--movistar-green);
+            font-weight: 700;
+            text-align: center;
+            margin-top: auto; /* Empuja el precio hacia abajo */
+            margin-bottom: 30px;
+            display: block;
+        }
+        .card .price-tag small {
+            font-size: 0.6em;
+            font-weight: 400;
+            color: var(--text-medium);
+            display: block; /* La unidad debajo del número */
+            margin-top: 5px;
+        }
+        .card .card-cta {
+            display: block;
+            background-color: var(--movistar-blue);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-top: 20px; /* Asegura espacio si el precio es pequeño */
+        }
+        .card .card-cta:hover {
+            background-color: var(--movistar-dark-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Contact Section */
+        #contacto {
+            background-color: var(--movistar-blue); /* Fondo azul para la sección de contacto */
+            color: var(--text-light);
+            padding: 80px 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-top: 40px;
+            text-align: center;
+        }
+        #contacto h2 {
+            color: var(--text-light); /* Título blanco */
+        }
+        #contacto h2::after {
+            background: var(--movistar-green); /* Línea verde */
+        }
+        #contacto p {
+            color: rgba(255,255,255,0.9); /* Texto blanco ligeramente transparente */
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+        #contacto .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--bg-light); /* Formulario blanco */
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            text-align: left;
+        }
+        #contacto .contact-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.05em;
+        }
+        #contacto .contact-form input,
+        #contacto .contact-form textarea {
+            width: calc(100% - 24px); /* Ajuste de padding */
+            padding: 14px 12px;
+            margin-bottom: 25px;
+            border: 1px solid var(--movistar-blue);
+            border-radius: 6px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #contacto .contact-form input:focus,
+        #contacto .contact-form textarea:focus {
+            border-color: var(--movistar-green);
+            box-shadow: 0 0 0 4px rgba(40,167,69,0.25); /* Sombra de enfoque más marcada */
+            outline: none;
+        }
+        #contacto .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        #contacto .contact-form button {
+            background-color: var(--movistar-green);
+            color: white;
+            padding: 16px 35px; /* Botón más grande */
+            border: none;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 12px rgba(40,167,69,0.35);
+            display: block;
+            margin: 0 auto;
+        }
+        #contacto .contact-form button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(40,167,69,0.45);
+        }
+        .form-message {
+            text-align: center;
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            display: none;
+        }
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info-contact-footer {
+            margin-top: 40px;
+            font-size: 1.05em;
+            color: rgba(255,255,255,0.85);
+        }
+        .info-contact-footer a {
+            color: var(--paypal-yellow); /* Color amarillo para el enlace de teléfono */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .info-contact-footer a:hover {
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 50px 25px; /* Más padding */
+            font-size: 0.95em;
+            margin-top: 40px;
+            border-top: 5px solid var(--movistar-blue); /* Borde superior más fuerte */
+        }
+        footer .footer-links {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        footer .footer-links li {
+            margin: 0 20px 12px; /* Más espacio */
+        }
+        footer .footer-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+        }
+        footer .footer-links li a:hover {
+            color: var(--movistar-green);
+            transform: translateY(-2px);
+        }
+        footer .social-links {
+            margin-top: 25px;
+            margin-bottom: 35px;
+        }
+        footer .social-links a {
+            color: var(--text-light);
+            font-size: 1.8em; /* Iconos más grandes */
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        footer .social-links a:hover {
+            color: var(--movistar-green);
+            transform: translateY(-5px) scale(1.1); /* Efecto de rebote */
+        }
+        footer p {
+            margin-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.15); /* Línea divisoria más clara */
+            padding-top: 25px;
+            font-size: 0.88em;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2em;
+            }
+            .hero p {
+                font-size: 1.3em;
+            }
+            /* Header para tabletas y móviles */
+            header {
+                flex-direction: row; /* Mantener elementos en fila en el header */
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 25px;
+            }
+            .logo {
+                margin-bottom: 0;
+            }
+            .hamburger-menu {
+                display: block; /* Mostrar el botón hamburguesa */
+            }
+            nav {
+                position: absolute;
+                top: 85px; /* Altura del header + espacio */
+                left: 0;
+                right: 0;
+                background-color: var(--bg-light);
+                box-shadow: var(--shadow-light);
+                z-index: 999;
+                display: none; /* Ocultar el menú por defecto */
+                flex-direction: column;
+                width: 100%;
+                max-height: 0; /* Para transición de altura */
+                overflow: hidden;
+                transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            }
+            nav.active { /* Clase que se añade con JS para mostrar el menú */
+                display: flex;
+                max-height: 400px; /* Altura suficiente para el contenido */
+                padding: 20px 0; /* Padding cuando el menú está abierto */
+            }
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start; /* Alinear ítems del menú a la izquierda */
+                padding: 0;
+            }
+            nav ul li {
+                margin: 0;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid var(--movistar-light-blue);
+            }
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+            nav ul li a {
+                display: block;
+                padding: 15px 25px;
+                width: calc(100% - 50px);
+                color: var(--text-dark); /* Color de texto del menú desplegado */
+                font-size: 1.1em;
+            }
+            nav ul li a::after { /* Ocultar el efecto de subrayado en el menú desplegado */
+                display: none;
+            }
+            nav ul li a:hover {
+                background-color: var(--movistar-light-blue);
+                transform: none;
+            }
+            .nav-button {
+                width: calc(100% - 50px);
+                margin: 15px 25px;
+                text-align: center;
+            }
+
+            section h2 {
+                font-size: 2.5em;
+            }
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            .hero {
+                padding: 90px 15px;
+            }
+            .hero h1 {
+                font-size: 2.8em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            .hero-cta {
+                padding: 16px 35px;
+                font-size: 1.1em;
+            }
+            section {
+                padding: 50px 20px;
+            }
+            section h2 {
+                font-size: 2.1em;
+                margin-bottom: 25px;
+            }
+            section p {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+            .card {
+                padding: 25px;
+            }
+            .card h3 {
+                font-size: 1.8em;
+            }
+            .card .price-tag {
+                font-size: 2.4em;
+            }
+            #contacto .contact-form {
+                padding: 30px;
+            }
+            footer {
+                padding: 40px 15px;
+            }
+            footer .footer-links li {
+                margin: 0 10px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 45px;
+            }
+            nav ul li {
+                margin: 5px 10px;
+            }
+            nav ul li a {
+                font-size: 0.9em;
+            }
+            .hero h1 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 0.95em;
+            }
+            .hero-cta {
+                padding: 14px 28px;
+                font-size: 1em;
+            }
+            section {
+                padding: 40px 15px;
+            }
+            section h2 {
+                font-size: 1.8em;
+                padding-bottom: 10px;
+            }
+            section h2::after {
+                width: 80px;
+                height: 3px;
+            }
+            .card-icon {
+                font-size: 3em;
+            }
+            .card h3 {
+                font-size: 1.6em;
+            }
+            .card ul li {
+                font-size: 0.95em;
+            }
+            .card .price-tag {
+                font-size: 2em;
+            }
+            .card .card-cta {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            #contacto .contact-form {
+                padding: 20px;
+            }
+            .info-contact-footer {
+                font-size: 0.9em;
+            }
+            footer .social-links a {
+                font-size: 1.6em;
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/movistar-paypal-logo.png" alt="Logotipo de Movistar y PayPal, representando la unión de servicios de telecomunicaciones y pagos en línea.">
+        </div>
+        <button class="hamburger-menu" aria-label="Abrir menú de navegación">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul id="main-nav">
+                <li><a href="#planes">Planes Móviles</a></li>
+                <li><a href="#recargas">Recargas Fáciles</a></li>
+                <li><a href="#contacto">Soporte</a></li>
+                <li><a href="#" class="nav-button">Mi Movistar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Movistar & PayPal: Tu Conexión y Pagos, Más Fáciles que Nunca.</h1>
+                <p>Descubre nuestras promociones exclusivas, planes y recargas diseñados para ti. ¡Disfruta de la mejor red con la comodidad de PayPal!
+                <br>¡Aviso importante, lea los avisos de privacidad para conocer nuestras políticas!</p>
+                <a href="#planes" class="hero-cta">Explorar Ofertas Especiales</a>
+            </div>
+        </section>
+
+        <section id="planes" class="container">
+            <h2>Nuestros Planes Móviles con Beneficios Exclusivos PayPal</h2>
+            <p>Elige el plan que se adapte perfectamente a tu estilo de vida. ¡Contratar es sencillo y seguro, con opciones de pago optimizadas con PayPal!</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <i class="fas fa-mobile-alt card-icon"></i>
+                    <h3>Plan Smart 10GB</h3>
+                    <p class="card-description">Perfecto para mantenerte conectado en tu día a día, con beneficios que te encantarán.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 10 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados (MX, USA, CAN)</li>
+                        <li><i class="fas fa-check-circle"></i> WhatsApp, Facebook, Twitter ilimitados</li>
+                        <li><i class="fas fa-check-circle"></i> 2 GB adicionales al pagar con PayPal</li>
+                    </ul>
+                    <span class="price-tag">49<small>/mes</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=50" target="_blank" class="card-cta">¡Contratar Ahora!</a>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-wifi card-icon"></i>
+                    <h3>Plan Avanzado 25GB</h3>
+                    <p class="card-description">Navega, streamea y comparte sin límites. Tu experiencia digital mejorada.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 25 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados (MX, USA, CAN)</li>
+                        <li><i class="fas fa-check-circle"></i> Todas tus Redes Sociales ilimitadas</li>
+                        <li><i class="fas fa-check-circle"></i> Roaming en USA y Canadá incluido</li>
+                        <li><i class="fas fa-check-circle"></i> 5 GB adicionales al pagar con PayPal</li>
+                    </ul>
+                    <span class="price-tag">119<small>/mes</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=100" target="_blank" class="card-cta">¡Contratar Ahora!</a>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-cloud card-icon"></i>
+                    <h3>Plan Superior 60GB</h3>
+                    <p class="card-description">Para los que necesitan más. Disfruta de una conexión robusta y sin interrupciones.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 50 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados (Nacionales e Internacionales)</li>
+                        <li><i class="fas fa-check-circle"></i> Zona Wi-Fi compartida de 10 GB</li>
+                        <li><i class="fas fa-check-circle"></i> Movistar Cloud 100GB</li>
+                        <li><i class="fas fa-check-circle"></i> 10% de descuento en la primera mensualidad con PayPal</li>
+                    </ul>
+                    <span class="price-tag">179<small>/mes</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=200" target="_blank" class="card-cta">¡Contratar Ahora!</a>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-infinity card-icon"></i>
+                    <h3>Plan Ilimitado Total</h3>
+                    <p class="card-description">La máxima conexión para quienes lo quieren todo. Libertad total en tu smartphone.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Datos Ilimitados (Política de Uso Justo)</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados (Nacionales e Internacionales)</li>
+                        <li><i class="fas fa-check-circle"></i> Zona Wi-Fi compartida ilimitada</li>
+                        <li><i class="fas fa-check-circle"></i> Movistar Cloud 500GB</li>
+                        <li><i class="fas fa-check-circle"></i> Beneficios exclusivos y soporte premium</li>
+                        <li><i class="fas fa-check-circle"></i> Mes gratis al contratar con PayPal (nuevas altas)</li>
+                    </ul>
+                    <span class="price-tag">249<small>/mes</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=300" target="_blank" class="card-cta">¡Contratar Ahora!</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="recargas" class="container">
+            <h2>Recarga Tu Saldo Fácilmente con PayPal</h2>
+            <p>Mantén tu línea activa y disfruta de todos los beneficios de Movistar. ¡Recarga en segundos y aprovecha nuestras promociones!</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <i class="fas fa-battery-quarter card-icon"></i>
+                    <h3>Recarga Express </h3>
+                    <p class="card-description">Conéctate en segundos. Ideal para una urgencia o si necesitas un poco de datos extra.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Duración: 5 días</li>
+                        <li><i class="fas fa-check-circle"></i> 1 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> WhatsApp ilimitado</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados</li>
+                        <li><i class="fas fa-check-circle"></i> 500 MB de regalo al recargar con PayPal</li>
+                    </ul>
+                    <span class="price-tag">19<small>MXN</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=30" target="_blank" class="card-cta">Recargar Ahora</a>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-battery-half card-icon"></i>
+                    <h3>Recarga Plus </h3>
+                    <p class="card-description">Más tiempo para navegar y chatear con tus apps favoritas. Conéctate sin preocupaciones.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Duración: 10 días</li>
+                        <li><i class="fas fa-check-circle"></i> 5 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> Redes Sociales ilimitadas</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados</li>
+                        <li><i class="fas fa-check-circle"></i> 1 GB de regalo al recargar con PayPal</li>
+                    </ul>
+                    <span class="price-tag">29<small>MXN</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=50" target="_blank" class="card-cta">Recargar Ahora</a>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-battery-three-quarters card-icon"></i>
+                    <h3>Recarga Popular </h3>
+                    <p class="card-description">Conexión completa para todo el mes. ¡Disfruta de la libertad de estar siempre online!</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Duración: 15 días</li>
+                        <li><i class="fas fa-check-circle"></i> 10 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> GB ilimitados para apps seleccionadas</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados</li>
+                        <li><i class="fas fa-check-circle"></i> 1 GB de regalo al recargar con PayPal</li>
+                    </ul>
+                    <span class="price-tag">99<small>MXN</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=100" target="_blank" class="card-cta">Recargar Ahora</a>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-battery-full card-icon"></i>
+                    <h3>Recarga Premium </h3>
+                    <p class="card-description">La mejor opción para una conectividad sin preocupaciones durante más tiempo.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Duración: 30 días</li>
+                        <li><i class="fas fa-check-circle"></i> 16 GB de datos</li>
+                        <li><i class="fas fa-check-circle"></i> Redes Sociales ilimitadas</li>
+                        <li><i class="fas fa-check-circle"></i> Llamadas y SMS ilimitados</li>
+                        <li><i class="fas fa-check-circle"></i> 2 GB de regalo y 100 MB de roaming al recargar con PayPal</li>
+                    </ul>
+                    <span class="price-tag">139<small>MXN</small></span>
+                    <a href="https://www.paypal.me/MovistarPromociones?amount=150" target="_blank" class="card-cta">Recargar Ahora</a>
+                </div>
+            </div>
+            <p style="margin-top: 45px; font-weight: 600; font-size: 1.1em;">¿Necesitas otro monto? Puedes recargar el monto que quieras en PayPal. El plan o beneficios se te aplicarán conforme al valor exacto del pago.</p>
+            <a href="https://www.paypal.me/MovistarPromociones" target="_blank" class="hero-cta" style="background-color: var(--paypal-blue);">
+                <i class="fab fa-paypal"></i> Recarga Otros Montos con PayPal
+            </a>
+        </section>
+
+        <section id="contacto" class="container">
+            <h2>¿Tienes Preguntas? Estamos Aquí Para Ayudarte.</h2>
+            <p>Envíanos un mensaje si necesitas asistencia, más información sobre nuestros planes con PayPal, o soporte técnico. Tu consulta es importante para nosotros.</p>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <label for="name">Nombre Completo:</label>
+                    <input type="text" id="name" name="name" required placeholder="Ingresa tu nombre">
+
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+
+                    <label for="phone">Número de Teléfono (opcional):</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Ej: 55 1234 5678">
+
+                    <label for="message">Tu Mensaje o Consulta:</label>
+                    <textarea id="message" name="message" required placeholder="Escribe tu mensaje aquí..."></textarea>
+
+                    <button type="submit">Enviar Mensaje</button>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+            <p class="info-contact-footer">También puedes contactarnos por teléfono marcando <a href="tel:+528006684782">*611</a> desde tu Movistar o al <a href="tel:+528006684782">800-MOVISTAR</a>.</p>
+            <div style="margin-top: 40px;">
+                <h3 style="color: white; font-family: 'Montserrat', sans-serif; font-size: 1.8em; margin-bottom: 20px;">Síguenos en Redes Sociales</h3>
+                <div class="social-links" style="justify-content: center; margin-bottom: 0;">
+                    <a href="https://www.facebook.com/MovistarMX" target="_blank" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f" style="color: white;"></i></a>
+                    <a href="https://x.com/MovistarMX" target="_blank" aria-label="Síguenos en X (Twitter)"><i class="fab fa-twitter" style="color: white;"></i></a>
+                    <a href="https://www.instagram.com/movistarmx/" target="_blank" aria-label="Síguenos en Instagram"><i class="fab fa-instagram" style="color: white;"></i></a>
+                    <a href="https://www.youtube.com/user/MovistarMX" target="_blank" aria-label="Síguenos en YouTube"><i class="fab fa-youtube" style="color: white;"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#">Aviso de Privacidad</a></li>
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Legales & Regulaciones</a></li>
+                <li><a href="#">Preguntas Frecuentes</a></li>
+                <li><a href="#">Acerca de Nosotros</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1Yb97XuP8T/?mibextid=wwXIfr" target="_blank" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/movistarmx" target="_blank" aria-label="Síguenos en X (Twitter)"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/movistarmx/" target="_blank" aria-label="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/MovistarMX" target="_blank" aria-label="Síguenos en YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://tiktok.com/@movistarmx" target="_blank" aria-label="Síguenos en TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p>© 2025 Movistar & PayPal Promociones. Todos los derechos reservados. | México.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // JavaScript para el formulario de contacto (simulación de envío)
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formMessage = document.getElementById('formMessage');
+                formMessage.classList.remove('success', 'error');
+                formMessage.style.display = 'none';
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                if (name && email && message) {
+                    // Simula un envío exitoso
+                    setTimeout(() => {
+                        formMessage.textContent = '¡Gracias! Tu mensaje ha sido enviado. Un asesor Movistar te contactará pronto.';
+                        formMessage.classList.add('success');
+                        formMessage.style.display = 'block';
+                        document.getElementById('contactForm').reset();
+                    }, 1000);
+                } else {
+                    formMessage.textContent = 'Por favor, completa los campos obligatorios (Nombre, Correo, Mensaje).';
+                    formMessage.classList.add('error');
+                    formMessage.style.display = 'block';
+                }
+            });
+
+            // JavaScript para el menú hamburguesa
+            const hamburgerBtn = document.querySelector('.hamburger-menu');
+            const mainNav = document.getElementById('main-nav');
+            const navContainer = document.querySelector('nav');
+
+            hamburgerBtn.addEventListener('click', () => {
+                navContainer.classList.toggle('active');
+                const icon = hamburgerBtn.querySelector('i');
+                if (navContainer.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times'); // Cambia a icono de 'X' al abrir
+                    hamburgerBtn.setAttribute('aria-label', 'Cerrar menú de navegación');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars'); // Vuelve al icono de hamburguesa al cerrar
+                    hamburgerBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+                }
+            });
+
+            // Cerrar el menú al hacer clic en un enlace (para móviles)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    // Solo si el menú está activo y la ventana es móvil/tablet
+                    if (navContainer.classList.contains('active') && window.innerWidth <= 992) {
+                        navContainer.classList.remove('active');
+                        const icon = hamburgerBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        hamburgerBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+ading PayPalMovi 4.com.html…]()
